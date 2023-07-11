@@ -13,7 +13,7 @@ class LivroController {
         })
     }
 
-    static listarLivroID = async (req,res) => {
+    static listarLivroID =  (req,res) => {
         const id = req.params.id;
         livros.findById(id)
         .then((livros) => {
@@ -41,6 +41,17 @@ class LivroController {
         } catch(err) {
             res.status(500).send({message: `${err} nao foi possivel atualizar o livro`})
         }
+    }
+
+    static excluirLivro =  (req,res) => {
+        const id = req.params.id;
+        livros.findByIdAndDelete(id)
+        .then(() => {
+            res.status(200).send({message:` Livro Removido com sucesso`})
+        })
+        .catch((err) => {
+            res.status(500).send({message: `${err} Nao foi possivel deletar este livro`})
+        })
     }
 }
 
